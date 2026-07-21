@@ -36,24 +36,19 @@ We keep our TA informed about progress, blockers, and important decisions. The T
 
 ## Repository Structure
 
-We use two repositories inside the shared Group 9 GitHub organization:
+We use one shared full-stack GitHub repository with separate frontend and backend folders:
 
 ```text
-ttp-group9-polling/
-├── polling-app-frontend/
-└── polling-app-backend/
+Capstone-1-Polling-App/
+├── pollapp-front/
+└── pollapp-back/
 ```
 
-Repositories:
+Repository:
 
-- Frontend: https://github.com/ttp-group9-polling/polling-app-frontend
-- Backend: https://github.com/ttp-group9-polling/polling-app-backend
-- Project Board: https://github.com/orgs/ttp-group9-polling/projects/1
+- https://github.com/rehmanmohammad938/Capstone-1-Polling-App
 
-Frontend work belongs in the frontend repository.
-Backend and database work belong in the backend repository.
-
-We use one shared PostgreSQL database hosted on Neon.
+We also use one shared PostgreSQL database.
 
 ## Code Quality and Standards
 

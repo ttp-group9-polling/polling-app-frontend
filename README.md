@@ -16,10 +16,10 @@ Users can:
 | Name | Primary Role |
 |---|---|
 | Dhimy Jean | Frontend Lead and Planning Coordinator |
-| Rehman Mohammad| Backend Lead |
-|  | Database and Integration Lead |
+| Rehman Mohammad | Backend Lead |
+| Shan Htet San | Database and Integration Lead |
 
-**Assigned TA:** ____________________
+**Assigned TA:** Shirley Cheung
 
 ## Repositories
 
