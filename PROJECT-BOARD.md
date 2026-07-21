@@ -220,7 +220,7 @@ Begin only after the core is complete.
 - [ ] Authentication
 - [ ] Mobile improvements
 
-# Tomorrow’s Planning Checklist
+# Today’s Planning Checklist
 
 - [ ] Confirm organization invitations
 - [ ] Add the third teammate
