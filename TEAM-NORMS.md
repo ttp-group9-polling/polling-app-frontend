@@ -6,13 +6,13 @@ We have discussed how we want to work together. We agree that these expectations
 
 ## Team Members
 
-| Name | GitHub | Discord | Weekly Hours | Best Availability |
-|---|---|---|---|---|
-| Dhimy Jean | @dhimysoft | @__________ | 30–35 hours | Monday–Friday, 10:00 AM–5:00 PM |
-| ____________________ | @__________ | @__________ | 30–35 hours | Monday–Friday, 10:00 AM–5:00 PM |
-| ____________________ | @__________ | @__________ | 30–35 hours | Monday–Friday, 10:00 AM–5:00 PM |
+|     Name        |       GitHub      |     Discord     | Weekly Hours |          Best Availability      |
+|-----------------|-------------------|-----------------|--------------|---------------------------------|
+| Dhimy Jean           | @dhimysoft   | @Dhimy Jean     | 30–35 hours  | Monday–Friday, 10:00 AM–5:00 PM |
+| Rehman Mohammad | @rehmanmohammad938| @Rehman Mohammad| 30–35 hours  | Monday–Friday, 10:00 AM–5:00 PM |
+| Shan Htet San   | @shanhtetsan      | @shanhtetsan29  | 30–35 hours  | Monday–Friday, 10:00 AM–5:00 PM |
 
-**Assigned TA:** ______________________
+**Assigned TA:** Shirley
 
 Each member commits to approximately 30–35 hours per week on this capstone during the TTP work schedule.
 
@@ -36,19 +36,24 @@ We keep our TA informed about progress, blockers, and important decisions. The T
 
 ## Repository Structure
 
-We use one shared full-stack GitHub repository with separate frontend and backend folders:
+We use two repositories inside the shared Group 9 GitHub organization:
 
 ```text
-Capstone-1-Polling-App/
-├── pollapp-front/
-└── pollapp-back/
+ttp-group9-polling/
+├── polling-app-frontend/
+└── polling-app-backend/
 ```
 
-Repository:
+Repositories:
 
-- https://github.com/rehmanmohammad938/Capstone-1-Polling-App
+- Frontend: https://github.com/ttp-group9-polling/polling-app-frontend
+- Backend: https://github.com/ttp-group9-polling/polling-app-backend
+- Project Board: https://github.com/orgs/ttp-group9-polling/projects/1
 
-We also use one shared PostgreSQL database.
+Frontend work belongs in the frontend repository.
+Backend and database work belong in the backend repository.
+
+We use one shared PostgreSQL database hosted on Neon.
 
 ## Code Quality and Standards
 
@@ -200,9 +205,9 @@ We deploy early:
 
 Deployment owners:
 
-- Frontend / Vercel: Dhimy Jean
-- Backend / Render: ____________________
-- Database / Neon: ____________________
+- Frontend / Vercel:Dhimy Jean
+- Backend / Render: Rehman Mohammad
+- Database / Neon:  Shan Htet San
 
 Our core overlap hours are Monday–Friday, 10:00 AM–5:00 PM.
 
@@ -226,8 +231,8 @@ A blocker lasting more than one working day is escalated to the TA.
 
 ## Agreed By
 
-| Name | Date |
-|---|---|
-| Dhimy Jean | __________ |
-| ____________________ | __________ |
-| ____________________ | __________ |
+| Name              |    Date |
+|-------------------|---------|
+| Dhimy Jean | ______________ |
+| Rehman Mohammad | _________ |
+| Shan Htet San| ____________ |

@@ -36,17 +36,19 @@ Then open a Pull Request into `main`.
 
 ## Repository Structure
 
-This project uses one shared full-stack repository:
+This project uses two repositories inside the Group 9 GitHub organization:
 
 ```text
-Capstone-1-Polling-App/
-├── pollapp-front/
-└── pollapp-back/
+ttp-group9-polling/
+├── polling-app-frontend/
+└── polling-app-backend/
 ```
 
-Repository:
+Repositories:
 
-- https://github.com/rehmanmohammad938/Capstone-1-Polling-App
+- Frontend: https://github.com/ttp-group9-polling/polling-app-frontend
+- Backend: https://github.com/ttp-group9-polling/polling-app-backend
+- Project Board: https://github.com/orgs/ttp-group9-polling/projects/1
 
 ## Pull Request Rules
 
@@ -112,13 +114,13 @@ Do not commit `.env` files.
 Frontend environment variables belong in:
 
 ```text
-pollapp-front/.env
+polling-app-frontend/.env
 ```
 
 Backend environment variables belong in:
 
 ```text
-pollapp-back/.env
+polling-app-backend/.env
 ```
 
 Only example files such as `.env.example` should be committed.

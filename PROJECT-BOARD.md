@@ -9,7 +9,7 @@
 Build a PERN polling app where users can view polls, create polls, vote, see results, and keep data after refresh.
 
 ## Repositories
-
+-foldername: `ttp-group9-polling`
 - Frontend: `polling-app-frontend`
 - Backend: `polling-app-backend`
 - Database: Neon PostgreSQL
