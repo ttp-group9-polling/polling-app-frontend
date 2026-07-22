@@ -1,3 +1,6 @@
+
+   /* GLOBAL VARIABLES AND DEFAULT FONT/COLOR SETTINGS */
+/* Main page background color */
 :root {
   --bg: #0f1220;
   --surface: #191d31;
@@ -10,6 +13,7 @@
   --border: #2c3252;
   --radius: 12px;
 
+    /* Default font for the entire application */
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   color: var(--text);
   background: var(--bg);
@@ -19,6 +23,7 @@
   box-sizing: border-box;
 }
 
+/* Sets the default page size, spacing, colors, and line height */
 body {
   margin: 0;
   min-width: 320px;
@@ -104,6 +109,208 @@ h1 {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+}
+
+.empty-state.error,
+.form-error {
+  color: var(--danger);
+}
+
+/* --- Cards --- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+.poll-grid {
+  margin-top: 2rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.poll-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.poll-card-title {
+  margin: 0 0 0.35rem;
+  font-size: 1.2rem;
+}
+
+.poll-card-desc {
+  margin: 0;
+  color: var(--muted);
+}
+
+.poll-card-meta {
+  margin: 0.5rem 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.poll-card-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* --- Buttons --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid var(--primary);
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  text-decoration: none;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.btn-ghost:hover {
+  background: var(--surface-2);
+  border-color: var(--border);
+}
+
+.btn-icon {
+  padding: 0.55rem 0.8rem;
+}
+
+/* --- Forms --- */
+.form {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.field > span {
+  font-weight: 600;
+}
+
+.field input[type="text"],
+.field input[type="email"],
+.field textarea {
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.option-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.option-row input {
+  flex: 1;
+}
+
+.choice {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.8rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.choice:hover {
+  border-color: var(--primary);
+}
+
+.choice input {
+  accent-color: var(--primary);
+}
+
+/* --- Results --- */
+.results {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.result-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.result-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.result-count {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.bar-track {
+  height: 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background: var(--surface-2);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+  min-width: 2px;
+}
+
+.bar-leader {
+  background: var(--primary);
 }
 
 @media (max-width: 600px) {
