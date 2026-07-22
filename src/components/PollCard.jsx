@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 function PollCard({ poll }) {
-  const optionCount = poll.Options?.length ?? 0;
+  const optionCount = poll.options?.length ?? poll.Options?.length ?? 0;
 
   return (
     <article className="card poll-card">
