@@ -1,236 +1,68 @@
-# Capstone I Polling App — Short Project Board
+# Project Board - Group 9 Polling App
 
-**Team:** Group 9  
-**Duration:** 1 week  
-**Organization:** `ttp-group9-polling`
+Team: Group 9 | Duration: 1 week | Org: `ttp-group9-polling`
 
 ## Goal
 
-Build a PERN polling app where users can view polls, create polls, vote, see results, and keep data after refresh.
+A PERN polling app where users view polls, create polls, vote, see results, and keep data after a refresh.
 
 ## Repositories
-- Organization: `ttp-group9-polling`
-- Frontend: `polling-app-frontend`
-- Backend: `polling-app-backend`
+
+- Frontend: polling-app-frontend
+- Backend: polling-app-backend
 - Database: Neon PostgreSQL
 
-## Status
+## Status legend
 
-- `Not Started`
-- `In Progress`
-- `In Review`
-- `Blocked`
-- `Completed`
+Not Started / In Progress / In Review / Blocked / Done
 
-# 1. Team Setup and Planning
+## 1. Setup and planning - Done
 
-**Owner:** Entire Team  
-**Status:** In Progress
+- [x] Create org and both repos
+- [x] Invite team and TA
+- [x] Team norms, roles, and deployment owners
+- [x] Agree on the API contract and database schema
 
-- [x] Create GitHub organization
-- [x] Create frontend and backend repositories
-- [x] Invite Rehman and TA
-- [ ] Invite third teammate
-- [ ] Confirm everyone can access both repositories
-- [ ] Complete Team Norms
-- [ ] Confirm roles and deployment owners
-- [ ] Review and assign board tasks
+## 2. Database - Done
 
-**Done when:** Everyone has access and understands their responsibilities.
+- [x] Poll, Option, and Vote models with associations
+- [x] Seed data
+- [x] dbdiagram.io schema
 
-# 2. Requirements and User Flow
+## 3. Backend - In Review
 
-**Owner:** Entire Team  
-**Status:** Not Started
+- [x] GET /polls, POST /polls, GET /polls/:id, POST /polls/:id/vote
+- [x] Validation and clear error responses
+- [x] Tested in Postman
+- [ ] PR reviewed and merged into main
 
-- [ ] Review the official requirements
-- [ ] Confirm the core flow:
-  - View all polls
-  - Create a poll
-  - Open one poll
-  - Submit a vote
-  - View results
-- [ ] Confirm stretch goals begin only after the core is complete
+## 4. Frontend - In Progress
 
-**Done when:** Every teammate can explain the project.
+- [x] React, Vite, Router, shared layout
+- [x] Home, Create Poll, Poll, and Results pages
+- [x] API client and loading / empty / error states
+- [ ] PR reviewed and merged into main
+- [ ] Styling (css)
 
-# 3. Database Design
+## 5. Integration and deployment - Not Started
 
-**Owner:** Database and Integration Lead  
-**Status:** Not Started
-
-Required tables:
-
-- `Polls`
-- `Options`
-- `Votes`
-
-Required relationships:
-
-- Poll has many Options
-- Option belongs to Poll
-- Option has many Votes
-- Vote belongs to Option
-
-Tasks:
-
-- [ ] Confirm columns, data types, foreign keys, and constraints
-- [ ] Create the dbdiagram.io diagram
-- [ ] Review and approve the schema
-
-**Done when:** The schema is approved before Sequelize models are created.
-
-# 4. System Design and API Contract
-
-**Owner:** Entire Team  
-**Status:** Not Started
-
-```text
-React frontend
-      ↓
-Express backend
-      ↓
-Sequelize
-      ↓
-PostgreSQL / Neon
-```
-
-Required routes:
-
-- `GET /polls`
-- `POST /polls`
-- `GET /polls/:id`
-- `POST /polls/:id/vote`
-
-Tasks:
-
-- [ ] Confirm route prefix
-- [ ] Confirm request bodies
-- [ ] Confirm response shapes
-- [ ] Confirm status codes and error format
-- [ ] Confirm CORS and environment variables
-- [ ] Confirm Vercel, Render, and Neon owners
-
-**Done when:** Frontend and backend can work from the same written contract.
-
-# 5. Figma Wireframes
-
-**Owner:** Dhimy Jean  
-**Status:** Not Started
-
-Create:
-
-- [ ] Home page
-- [ ] Create Poll page
-- [ ] Poll/Voting page
-- [ ] Results page
-
-Include navigation, forms, poll options, vote button, results, loading, empty, and error states.
-
-**Done when:** The team approves all four screens.
-
-# 6. Repository Preparation
-
-**Owners:** Frontend Lead and Backend Lead  
-**Status:** Not Started
-
-- [ ] Move frontend code into `polling-app-frontend`
-- [ ] Move backend code into `polling-app-backend`
-- [ ] Exclude `.env`, `node_modules`, and `dist`
-- [ ] Add `.env.example`
-- [ ] Confirm both projects run locally
-- [ ] Open reviewed Pull Requests
-
-**Done when:** Both organization repositories run correctly.
-
-# 7. Backend and Database Implementation
-
-**Owners:** Backend Lead and Database Lead  
-**Status:** Not Started
-
-- [ ] Configure PostgreSQL and Sequelize
-- [ ] Create Poll, Option, and Vote models
-- [ ] Add associations
-- [ ] Add seed data
-- [ ] Implement all four required routes
-- [ ] Test routes in Postman
-
-**Done when:** All API routes work and data persists.
-
-# 8. Frontend Implementation
-
-**Owner:** Dhimy Jean  
-**Status:** In Progress
-
-- [x] Set up React and Vite
-- [x] Configure React Router
-- [x] Create shared layout and starter pages
-- [x] Confirm production build
-- [ ] Build Home page
-- [ ] Build Create Poll page
-- [ ] Build Poll/Voting page
-- [ ] Build Results page
-- [ ] Add loading, empty, and error states
-- [ ] Connect pages to the API
-
-**Done when:** Users can complete the full polling flow.
-
-# 9. Integration and Deployment
-
-**Owner:** Entire Team  
-**Status:** Not Started
-
-- [ ] Connect React to Express
-- [ ] Fix CORS and response-shape issues
 - [ ] Deploy database to Neon
 - [ ] Deploy backend to Render
 - [ ] Deploy frontend to Vercel
-- [ ] Add production environment variables
-- [ ] Share deployed URLs
+- [ ] Add production environment variables and share the URLs
 
-**Done when:** All deployed services work together.
+## 6. Core testing - Not Started
 
-# 10. Core Testing and Documentation
+- [ ] Full flow works: view, create, vote, results ordered by count
+- [ ] Navigation has no full-page reloads
+- [ ] Data persists after a backend restart
+- [ ] Update README and add schema / wireframe links
 
-**Owner:** Entire Team  
-**Status:** Not Started
+## Stretch goals (after core)
 
-- [ ] View all polls
-- [ ] Create a poll
-- [ ] Open a poll
-- [ ] Submit a vote
-- [ ] View results ordered by vote count
-- [ ] Confirm navigation has no full-page reloads
-- [ ] Restart backend and confirm data remains
-- [ ] Update README
-- [ ] Add Figma and database-diagram links
-- [ ] Prepare the final demonstration
-
-**Done when:** Every core requirement works locally and after deployment.
-
-# Stretch Goals
-
-Begin only after the core is complete.
-
+- [x] Prevent duplicate voting (one vote per email)
 - [ ] Shareable poll link
-- [ ] Prevent duplicate voting
 - [ ] Poll closing date
-- [ ] Active and closed polls
+- [ ] Active vs closed polls
 - [ ] Delete or duplicate a poll
-- [ ] Authentication
 - [ ] Mobile improvements
-
-# Today’s Planning Checklist
-
-- [ ] Confirm organization invitations
-- [ ] Add the third teammate
-- [ ] Complete Team Norms
-- [ ] Confirm roles and deployment owners
-- [ ] Review requirements
-- [ ] Approve database structure
-- [ ] Create dbdiagram.io diagram
-- [ ] Approve system design
-- [ ] Write API contract
-- [ ] Create four Figma wireframes
-- [ ] Assign tasks
-- [ ] Approve implementation order

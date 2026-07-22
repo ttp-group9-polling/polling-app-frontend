@@ -1,53 +1,54 @@
-# PulseBoard — TTP Summer 2026 Capstone I
+# Polling App - Frontend
 
-PulseBoard is a full-stack PERN polling application built by a three-person team.
+React frontend for the Group 9 TTP Summer 2026 Capstone I polling app.
 
 Users can:
 
 - View all polls
-- Create a poll with two or more options
+- Create a poll with 2 or more options
 - Open a poll and vote
-- View poll results
-- Navigate through the application with React Router
-- Keep polls and votes stored in PostgreSQL
+- See results ordered by vote count
+- Move between pages with React Router
+
+Polls and votes are stored in PostgreSQL through the Express backend, so they survive a refresh.
 
 ## Team
 
-| Name | Primary Role |
+| Name | Role |
 |---|---|
-| Dhimy Jean | Frontend Lead and Planning Coordinator |
+| Dhimy Jean | Frontend Lead |
 | Rehman Mohammad | Backend Lead |
 | Shan Htet San | Database and Integration Lead |
 
-**Assigned TA:** Shirley Cheung
+TA: Shirley Cheung
 
 ## Repositories
 
-This project uses two repositories inside the Group 9 GitHub organization:
+Two repos in the `ttp-group9-polling` organization:
 
 - Frontend: https://github.com/ttp-group9-polling/polling-app-frontend
 - Backend: https://github.com/ttp-group9-polling/polling-app-backend
-- Project Board: https://github.com/orgs/ttp-group9-polling/projects/1
+- Database: Neon PostgreSQL (no repo)
 
-This repository contains the React frontend only.
+This repo is the React frontend.
 
-## Frontend Project Structure
+## Getting Started
+
+```bash
+npm install
+cp .env.example .env   # set VITE_API_URL to the backend URL
+npm run dev
+```
+
+The app runs on http://localhost:5173 and expects the backend on http://localhost:3000.
+
+## Structure
 
 ```text
-polling-app-frontend/
-├── public/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── api.js
-│   ├── index.css
-│   └── main.jsx
-├── .env.example
-├── .gitignore
-├── CONTRIBUTING.md
-├── PROJECT-BOARD.md
-├── README.md
-├── TEAM-NORMS.md
-├── package.json
-├── vercel.json
-└── vite.config.js
+src/
+  components/   shared UI (Layout, PollCard)
+  pages/        Home, CreatePoll, Poll, Results, NotFound
+  api.js        fetch helpers for the backend
+  index.css     styles
+  main.jsx      routes
+```

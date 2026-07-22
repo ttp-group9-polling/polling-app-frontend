@@ -1,143 +1,54 @@
-# Contributing to PulseBoard
+# Contributing
 
-## Git Workflow
+## Git workflow
 
-Before starting new work:
+Start each task from an up-to-date main:
 
 ```bash
 git checkout main
-git pull origin main
+git pull
 git checkout -b feature/task-name
 ```
 
-Use a clear branch name that matches the task.
+Use a branch name that matches the task, for example `feature/create-poll` or `fix/cors-error`.
 
-Examples:
-
-- `feature/poll-list`
-- `feature/create-poll`
-- `feature/vote-route`
-- `feature/results-page`
-- `fix/cors-error`
-- `deploy/vercel`
-
-Commit small, focused changes:
+Commit small, focused changes and push:
 
 ```bash
-git status
 git add path/to/changed/files
-git commit -m "Add clear description"
+git commit -m "Clear description"
 git push -u origin feature/task-name
 ```
 
-Avoid using `git add .` when unrelated frontend or backend files are modified.
+Avoid `git add .` so you do not commit unrelated files. Then open a Pull Request into `main`.
 
-Then open a Pull Request into `main`.
+## Repositories
 
-## Repository Structure
+Two repos in the `ttp-group9-polling` organization:
 
-This project uses one shared full-stack repository:
+- Frontend: https://github.com/ttp-group9-polling/polling-app-frontend
+- Backend: https://github.com/ttp-group9-polling/polling-app-backend
 
-```text
-Capstone-1-Polling-App/
-├── pollapp-front/
-└── pollapp-back/
-```
+Each repo has its own `.env` (never committed) and its own `.env.example` (committed).
 
-Repository:
+## Pull request rules
 
-- https://github.com/rehmanmohammad938/Capstone-1-Polling-App
+Every PR should:
 
-## Pull Request Rules
+- Be small and focused, with only files related to the task
+- Explain what changed and how to test it
+- Link its issue with `Closes #N`
+- Get at least one approving review from a teammate
+- Leave out `.env`, `node_modules`, and secrets (no secrets in `VITE_` variables)
 
-Every Pull Request must:
+`main` must always work. Nobody pushes directly to `main`.
 
-- Be small and focused
-- Link an issue using `Closes #N`
-- Explain what changed
-- Explain how to test it
-- Receive at least one approving review from another teammate
-- Pass local testing before merge
-- Avoid including unrelated frontend or backend changes
-- Avoid committing secrets, `.env`, or `node_modules`
-
-## Pull Request Description Template
-
-```md
-## Summary
-
-Briefly explain what this Pull Request adds or changes.
-
-## Included
-
-- Change 1
-- Change 2
-- Change 3
-
-## How to Test
-
-1. Open the correct project folder.
-2. Run `npm install`.
-3. Run the application.
-4. Test the listed routes or features.
-5. Run `npm run build` when applicable.
-
-Closes #N
-```
-
-## Review Checklist
-
-The reviewer should confirm:
-
-- The branch runs locally
-- The code matches the shared API contract
-- No secrets are committed
-- No `node_modules` folder is committed
-- Error handling is present where needed
-- Naming is clear
-- The change does not break existing features
-- The change contains only files related to the task
-- The author included clear testing instructions
-
-## Main Branch Rule
-
-`main` must always work.
-
-Nobody should push directly to `main`. All changes must reach `main` through a reviewed Pull Request.
-
-## Environment Variables
-
-Do not commit `.env` files.
-
-Frontend environment variables belong in:
-
-```text
-pollapp-front/.env
-```
-
-Backend environment variables belong in:
-
-```text
-pollapp-back/.env
-```
-
-Only example files such as `.env.example` should be committed.
-
-Never place passwords, database credentials, or private API keys in frontend variables beginning with `VITE_`.
-
-## Before Merging
-
-The author and reviewer should confirm:
+## Before merging
 
 ```bash
 git status
 npm run build
-```
-
-When applicable, also run:
-
-```bash
 npm run lint
 ```
 
-After approval, merge the Pull Request into `main` and delete the feature branch when it is no longer needed.
+After approval, merge into `main` and delete the feature branch.
