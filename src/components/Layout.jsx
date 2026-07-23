@@ -1,4 +1,8 @@
-import { Link, Outlet } from "react-router-dom";
+// Layout.jsx - Shows the navbar, page content, and footer.
+
+
+
+import { Link, Outlet } from "react-router-dom"; // Link changes pages; Outlet shows the current page
 
 function Layout() {
   return (
@@ -25,4 +29,4 @@ function Layout() {
   );
 }
 
-export default Layout;
+export default Layout; // Allows main.jsx to import and use Layout

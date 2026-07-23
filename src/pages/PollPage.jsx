@@ -1,3 +1,5 @@
+
+// PollPage.jsx - Shows one poll and lets the user vote.
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
@@ -7,15 +9,18 @@ function PollPage() {
   const { id } = useParams();
   const navigate = useNavigate();
 
+    // Stores the poll and loading status.
   const [poll, setPoll] = useState(null);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
 
+    // Stores the vote form values and status.
   const [selectedOption, setSelectedOption] = useState(null);
   const [email, setEmail] = useState("");
   const [voteError, setVoteError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
+  // Loads the selected poll.
   useEffect(() => {
     getPoll(id)
       .then(setPoll)
@@ -23,6 +28,7 @@ function PollPage() {
       .finally(() => setLoading(false));
   }, [id]);
 
+  // Validates and submits the vote.
   async function handleVote(event) {
     event.preventDefault();
     setVoteError("");
@@ -73,7 +79,7 @@ function PollPage() {
       <h1>{poll.title}</h1>
       <p className="subtitle">{poll.description}</p>
 
-      <form className="card form" onSubmit={handleVote}>
+      <form className="card form" onSubmit={handleVote}>  {/* Displays one choice for each poll option. */}
         <div className="field">
           <span>Choose one</span>
           {poll.options.map((option) => (
@@ -119,4 +125,4 @@ function PollPage() {
   );
 }
 
-export default PollPage;
+export default PollPage; // Allows other files to use this page

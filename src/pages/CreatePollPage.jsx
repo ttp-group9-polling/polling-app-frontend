@@ -1,3 +1,5 @@
+
+// CreatePollPage.jsx - Creates and submits a new poll.
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -6,12 +8,14 @@ import { createPoll } from "../api.js";
 function CreatePollPage() {
   const navigate = useNavigate();
 
+    // Stores the form values and page status.
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [options, setOptions] = useState(["", ""]);
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
+    // Updates, adds, or removes poll options.
   function updateOption(index, value) {
     setOptions((prev) => prev.map((opt, i) => (i === index ? value : opt)));
   }
@@ -24,6 +28,7 @@ function CreatePollPage() {
     setOptions((prev) => prev.filter((_, i) => i !== index));
   }
 
+   // Validates and sends the new poll to the backend.
   async function handleSubmit(event) {
     event.preventDefault();
     setError("");
@@ -80,6 +85,7 @@ function CreatePollPage() {
           />
         </label>
 
+        {/* Displays one input for each poll option. */}
         <div className="field">
           <span>Options</span>
           {options.map((option, index) => (
@@ -117,4 +123,4 @@ function CreatePollPage() {
   );
 }
 
-export default CreatePollPage;
+export default CreatePollPage; // Allows other files to import and use this page

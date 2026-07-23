@@ -1,7 +1,12 @@
+
+// PollCard.jsx  -  A reusable card for ONE poll. HomePage renders many via .map.
+
+// the Vote / Results links
 import { Link } from "react-router-dom";
 
 function PollCard({ poll }) {
-  const optionCount = poll.Options?.length ?? 0;
+  const optionCount = poll.Options?.length ?? 0; // how many options; ?. avoids a crash, ?? 0 gives a fallback
+
 
   return (
     <article className="card poll-card">
@@ -14,10 +19,10 @@ function PollCard({ poll }) {
       </div>
 
       <div className="poll-card-actions">
-        <Link className="btn" to={`/polls/${poll.id}`}>
+        <Link className="btn" to={`/polls/${poll.id}`}> {/* go to this poll's vote page */}
           Vote
         </Link>
-        <Link className="btn btn-ghost" to={`/polls/${poll.id}/results`}>
+        <Link className="btn btn-ghost" to={`/polls/${poll.id}/results`}> {/* go to its results */}
           Results
         </Link>
       </div>
@@ -25,4 +30,4 @@ function PollCard({ poll }) {
   );
 }
 
-export default PollCard;
+export default PollCard; // export so HomePage can import it

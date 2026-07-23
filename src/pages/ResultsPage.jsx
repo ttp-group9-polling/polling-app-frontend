@@ -1,3 +1,4 @@
+// ResultsPage.jsx - Shows poll results and vote percentages.
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
@@ -6,10 +7,12 @@ import { getPoll } from "../api.js";
 function ResultsPage() {
   const { id } = useParams();
 
+  // Stores the poll and request status.
   const [poll, setPoll] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  // Loads the poll results.
   useEffect(() => {
     getPoll(id)
       .then(setPoll)
@@ -36,6 +39,7 @@ function ResultsPage() {
     );
   }
 
+  // Sorts the options from most votes to least votes.
   const ranked = [...poll.options].sort((a, b) => b.voteCount - a.voteCount);
   const maxVotes = ranked.reduce((max, o) => Math.max(max, o.voteCount), 0);
 
@@ -92,4 +96,4 @@ function ResultsPage() {
   );
 }
 
-export default ResultsPage;
+export default ResultsPage; // Allows other files to use this page

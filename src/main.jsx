@@ -1,3 +1,5 @@
+
+//  main.jsx - Starts the React app and connects each URL to a page.
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import {
@@ -15,6 +17,7 @@ import NotFoundPage from "./pages/NotFoundPage.jsx";
 
 import "./index.css";
 
+// Displays the app inside the root element.
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>

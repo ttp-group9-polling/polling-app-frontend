@@ -1,14 +1,16 @@
+// HomePage.jsx - Loads and displays all polls.
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { getPolls } from "../api.js";
 import PollCard from "../components/PollCard.jsx";
 
-function HomePage() {
+function HomePage() {  // Stores the polls and request status.
   const [polls, setPolls] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+    // Loads the polls when the page opens.
   useEffect(() => {
     getPolls()
       .then(setPolls)
@@ -33,6 +35,7 @@ function HomePage() {
         </div>
       )}
 
+      {/* Displays one card for each poll. */}
       {!loading && !error && polls.length > 0 && (
         <div className="poll-grid">
           {polls.map((poll) => (
@@ -44,4 +47,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default HomePage; // Allows other files to use this page
