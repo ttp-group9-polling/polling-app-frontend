@@ -1,9 +1,6 @@
-
-/* Phase 1 */
-// Phase 2 — Display 1 Mock Polls
 import PollCard from "./components/PollCard.jsx";
 
-// Temporary poll data used before connecting the backend.
+// Mock poll data used before connecting to the backend.
 const mockPolls = [
   {
     id: 1,
@@ -15,8 +12,6 @@ const mockPolls = [
       { id: 3, text: "Rice" },
     ],
   },
-  /* Phase 2 */
-// // Mock poll data used before connecting the backend.
   {
     id: 2,
     title: "Favorite programming language?",
@@ -29,8 +24,8 @@ const mockPolls = [
   },
   {
     id: 3,
-    title: "Movie",
-    description: "What's your favorite movie?",
+    title: "Favorite movie?",
+    description: "Choose the movie you like the most.",
     options: [
       { id: 7, text: "Movie One" },
       { id: 8, text: "Movie Two" },
@@ -45,8 +40,8 @@ function App() {
       <h1>All Polls</h1>
 
       <div className="poll-grid">
-        {mockPolls.map((poll) => ( //.map() visits each poll
-          <PollCard key={poll.id} poll={poll} /> //helps React uniquely identify every card.
+        {mockPolls.map((poll) => (
+          <PollCard key={poll.id} poll={poll} />
         ))}
       </div>
     </main>
