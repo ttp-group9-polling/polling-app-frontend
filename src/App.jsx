@@ -1,6 +1,11 @@
+/*
+Phase 2 — Display multiple mock polls
+
+This version displayed local mock data before connecting
+the frontend to the backend API.
+
 import PollCard from "./components/PollCard.jsx";
 
-// Mock poll data used before connecting to the backend.
 const mockPolls = [
   {
     id: 1,
@@ -41,6 +46,62 @@ function App() {
 
       <div className="poll-grid">
         {mockPolls.map((poll) => (
+          <PollCard key={poll.id} poll={poll} />
+        ))}
+      </div>
+    </main>
+  );
+}
+
+export default App;
+*/
+
+// Phase 3 — Loads polls from the backend API.
+import { useState, useEffect } from "react";
+import PollCard from "./components/PollCard.jsx";
+
+function App() {
+  const [polls, setPolls] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const url = "http://localhost:3000/api/polls";
+
+    async function loadPolls() {
+      try {
+        const res = await fetch(url);
+
+        if (!res.ok) {
+          throw new Error("Failed to load polls");
+        }
+
+        const data = await res.json();
+        setPolls(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadPolls();
+  }, []);
+
+  if (loading) {
+    return <p style={{ padding: 16 }}>Loading...</p>;
+  }
+
+  if (error) {
+    return <p style={{ padding: 16 }}>Error: {error}</p>;
+  }
+
+  return (
+    <main className="page">
+      <h1>All Polls</h1>
+
+      <div className="poll-grid">
+        {polls.map((poll) => (
           <PollCard key={poll.id} poll={poll} />
         ))}
       </div>
