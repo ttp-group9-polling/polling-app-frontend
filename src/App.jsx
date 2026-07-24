@@ -1,27 +1,51 @@
-// Displays the main polling application.
 import PollCard from "./components/PollCard.jsx";
 
-// Temporary poll data used before connecting the backend.
-const fakePoll = {
-  id: 1,
-  title: "What should we build next?",
-  description: "Choose the project idea you like the most.",
-  options: [
-    { id: 1, text: "Task manager" },
-    { id: 2, text: "Movie app" },
-    { id: 3, text: "Recipe app" },
-  ],
-};
+// Mock poll data used before connecting to the backend.
+const mockPolls = [
+  {
+    id: 1,
+    title: "What is the best food?",
+    description: "A quick poll to see what food consumers like.",
+    options: [
+      { id: 1, text: "Pizza" },
+      { id: 2, text: "Pasta" },
+      { id: 3, text: "Rice" },
+    ],
+  },
+  {
+    id: 2,
+    title: "Favorite programming language?",
+    description: "Vote for the language you reach for first.",
+    options: [
+      { id: 4, text: "JavaScript" },
+      { id: 5, text: "Python" },
+      { id: 6, text: "Java" },
+    ],
+  },
+  {
+    id: 3,
+    title: "Favorite movie?",
+    description: "Choose the movie you like the most.",
+    options: [
+      { id: 7, text: "Movie One" },
+      { id: 8, text: "Movie Two" },
+      { id: 9, text: "Movie Three" },
+    ],
+  },
+];
 
 function App() {
   return (
-    <main>
-      <h1>Polling App</h1>
-      <PollCard poll={fakePoll} />
+    <main className="page">
+      <h1>All Polls</h1>
+
+      <div className="poll-grid">
+        {mockPolls.map((poll) => (
+          <PollCard key={poll.id} poll={poll} />
+        ))}
+      </div>
     </main>
   );
 }
 
 export default App;
-
-/* Phase 2 */
