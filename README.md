@@ -40,7 +40,7 @@ cp .env.example .env   # set VITE_API_URL to the backend URL
 npm run dev
 ```
 
-The app runs on http://localhost:5173 and expects the backend on http://localhost:3000.
+The app runs on http://localhost:5173 and expects the backend on http://localhost:3000. or to see the Options, Polls, or Votes db use: http://localhost:3000/api/votes 
 
 ## Structure
 

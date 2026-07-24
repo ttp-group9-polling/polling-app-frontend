@@ -1,3 +1,4 @@
+// PollPage.jsx - Shows one poll and lets the user vote.
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
@@ -7,42 +8,50 @@ function PollPage() {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  // Stores the poll and loading status.
   const [poll, setPoll] = useState(null);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
 
+  // Stores the vote form values and status.
   const [selectedOption, setSelectedOption] = useState(null);
   const [email, setEmail] = useState("");
   const [voteError, setVoteError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
+  // load this poll when the page appears
   useEffect(() => {
     getPoll(id)
-      .then(setPoll)
+      .then(setPoll) //store
       .catch((err) => setLoadError(err.message))
       .finally(() => setLoading(false));
   }, [id]);
 
+  // Validates and submits the vote.
   async function handleVote(event) {
-    event.preventDefault();
-    setVoteError("");
+    event.preventDefault(); // stop defauld brower from reload
+    setVoteError(""); //clear any old error
 
     if (!selectedOption) {
+      // must pick an option
       setVoteError("Please choose an option.");
       return;
     }
     if (!email.trim()) {
-      setVoteError("Please enter your email so we can count one vote per person.");
+      // must enter an email
+      setVoteError(
+        "Please enter your email so we can count one vote per person.",
+      );
       return;
     }
 
-    setSubmitting(true);
+    setSubmitting(true); // disable the button while sending
     try {
       await castVote(id, {
         optionId: selectedOption,
-        voterEmail: email.trim(),
+        voterEmail: email.trim(), ///send vote
       });
-      navigate(`/polls/${id}/results`);
+      navigate(`/polls/${id}/results`); // success: go to the results page
     } catch (err) {
       setVoteError(err.message);
       setSubmitting(false);
@@ -60,7 +69,9 @@ function PollPage() {
   if (loadError) {
     return (
       <section>
-        <div className="empty-state error">Could not load this poll: {loadError}</div>
+        <div className="empty-state error">
+          Could not load this poll: {loadError}
+        </div>
         <p>
           <Link to="/">Back to all polls</Link>
         </p>
@@ -69,11 +80,14 @@ function PollPage() {
   }
 
   return (
+    // loaded: show the poll and the vote form
     <section>
       <h1>{poll.title}</h1>
       <p className="subtitle">{poll.description}</p>
 
       <form className="card form" onSubmit={handleVote}>
+        {" "}
+        {/* Displays one choice for each poll option. */}
         <div className="field">
           <span>Choose one</span>
           {poll.options.map((option) => (
@@ -89,7 +103,6 @@ function PollPage() {
             </label>
           ))}
         </div>
-
         <label className="field">
           <span>Your email</span>
           <input
@@ -99,9 +112,7 @@ function PollPage() {
             placeholder="you@example.com"
           />
         </label>
-
         {voteError && <p className="form-error">{voteError}</p>}
-
         <div className="poll-card-actions">
           <button type="submit" className="btn" disabled={submitting}>
             {submitting ? "Submitting..." : "Submit Vote"}
@@ -119,4 +130,4 @@ function PollPage() {
   );
 }
 
-export default PollPage;
+export default PollPage; // Allows other files to use this page

@@ -33,6 +33,7 @@ body {
   line-height: 1.5;
 }
 
+/* LINKS */
 a {
   color: var(--primary);
   text-decoration: none;
@@ -42,18 +43,21 @@ a:hover {
   text-decoration: underline;
 }
 
+/* FORM ELEMENT RESET */
 button,
 input,
 textarea {
   font: inherit;
 }
 
+/* MAIN APPLICATION LAYOUT */
 .app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
+/* NAVIGATION BAR */
 .navbar {
   display: flex;
   align-items: center;
@@ -79,6 +83,7 @@ textarea {
   gap: 1rem;
 }
 
+/* MAIN PAGE CONTENT */
 .page {
   width: min(900px, calc(100% - 2rem));
   margin: 0 auto;
@@ -86,12 +91,14 @@ textarea {
   flex: 1;
 }
 
+/* FOOTER */
 .footer {
   padding: 2rem 1rem;
   text-align: center;
   color: var(--muted);
 }
 
+/* HEADINGS AND PAGE TEXT */
 h1 {
   margin: 0 0 0.5rem;
   font-size: clamp(2rem, 5vw, 3rem);
@@ -102,6 +109,7 @@ h1 {
   color: var(--muted);
 }
 
+/* EMPTY AND ERROR STATES */
 .empty-state {
   margin-top: 2rem;
   padding: 1.5rem;
@@ -116,6 +124,8 @@ h1 {
   color: var(--danger);
 }
 
+
+/* CARDS */
 /* --- Cards --- */
 .card {
   background: var(--surface);
@@ -160,7 +170,7 @@ h1 {
   flex-wrap: wrap;
 }
 
-/* --- Buttons --- */
+/* BUTTONS */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -201,7 +211,8 @@ h1 {
   padding: 0.55rem 0.8rem;
 }
 
-/* --- Forms --- */
+
+/* FORMS */
 .form {
   margin-top: 2rem;
   display: flex;
@@ -268,7 +279,7 @@ h1 {
   accent-color: var(--primary);
 }
 
-/* --- Results --- */
+/* POLL RESULTS */
 .results {
   margin-top: 2rem;
   display: flex;
@@ -313,6 +324,7 @@ h1 {
   background: var(--primary);
 }
 
+/* MOBILE RESPONSIVE STYLES */
 @media (max-width: 600px) {
   .navbar {
     align-items: flex-start;
