@@ -57,8 +57,13 @@ export default App;
 */
 
 // Phase 3 — Loads polls from the backend API.
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import PollCard from "./components/PollCard.jsx";
+
+const API_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:3000";
+
+const url = `${API_URL}/api/polls`;
 
 function App() {
   const [polls, setPolls] = useState([]);
@@ -66,8 +71,6 @@ function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const url = "http://localhost:3000/api/polls";
-
     async function loadPolls() {
       try {
         const res = await fetch(url);
