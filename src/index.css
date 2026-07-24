@@ -1,0 +1,79 @@
+/* Phase 1 */
+/* Global colors and default font */
+:root {
+  --bg: #0f1220;
+  --surface: #191d31;
+  --text: #e8eaf2;
+  --muted: #9aa0bd;
+  --border: #2c3252;
+  --radius: 12px;
+
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+/* Includes padding and borders inside element sizes */
+* {
+  box-sizing: border-box;
+}
+
+/* Sets the main page colors and spacing */
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* Centers the page content */
+.page {
+  width: min(900px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 3rem 0;
+}
+
+/* Styles the main page heading */
+h1 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+/* Creates the card container */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+/* Arranges the poll card content */
+.poll-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* Styles the poll title */
+.poll-card-title {
+  margin: 0 0 0.35rem;
+  font-size: 1.2rem;
+}
+
+/* Styles the poll description */
+.poll-card-desc {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Styles the option count */
+.poll-card-meta {
+  margin: 0.5rem 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* Phase 2 */
