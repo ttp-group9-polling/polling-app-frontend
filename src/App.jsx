@@ -45,7 +45,7 @@ function App() {
       <h1>All Polls</h1>
 
       <div className="poll-grid">
-        {mockPollsPolls.map((poll) => ( //.map() visits each poll
+        {mockPolls.map((poll) => ( //.map() visits each poll
           <PollCard key={poll.id} poll={poll} /> //helps React uniquely identify every card.
         ))}
       </div>
