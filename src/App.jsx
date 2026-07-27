@@ -23,6 +23,10 @@ function App() {
           />
         </Routes>
       </main>
+
+      <footer className="footer">
+        <p>© 2026 Polling App — Group 9</p>
+      </footer>
     </div>
   );
 }

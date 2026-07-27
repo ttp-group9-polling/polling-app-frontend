@@ -36,12 +36,7 @@ textarea {
   font: inherit;
 }
 
-/* Keeps the footer at the bottom */
-.app {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+
 
 /* Arranges the navbar content */
 .navbar {
@@ -299,4 +294,23 @@ h2 {
 /* Highlights the winning vote count */
 .result-row:first-child strong {
   color: var(--primary);
+}
+
+/* Keeps the footer at the bottom */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Styles the footer */
+.footer {
+  padding: 1.25rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  text-align: center;
+}
+
+.footer p {
+  margin: 0;
 }
