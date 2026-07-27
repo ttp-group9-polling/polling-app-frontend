@@ -1,121 +1,144 @@
+// PollPage.jsx - Loads one poll and submits a vote.
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-
-import { getPoll, castVote } from "../api.js";
+import {
+  Link,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 
 function PollPage() {
   const { id } = useParams();
   const navigate = useNavigate();
 
   const [poll, setPoll] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [loadError, setLoadError] = useState("");
-
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [email, setEmail] = useState("");
-  const [voteError, setVoteError] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
+  const [voterEmail, setVoterEmail] = useState("");
+  const [error, setError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    getPoll(id)
-      .then(setPoll)
-      .catch((err) => setLoadError(err.message))
-      .finally(() => setLoading(false));
+    const API_URL =
+      import.meta.env.VITE_API_URL || "http://localhost:3000";
+
+    async function loadPoll() {
+      try {
+        const res = await fetch(`${API_URL}/api/polls/${id}`);
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || "Failed to load poll");
+        }
+
+        setPoll(data);
+      } catch (err) {
+        setError(err.message);
+      }
+    }
+
+    loadPoll();
   }, [id]);
 
-  async function handleVote(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    setVoteError("");
-
-    if (!selectedOption) {
-      setVoteError("Please choose an option.");
-      return;
-    }
-    if (!email.trim()) {
-      setVoteError("Please enter your email so we can count one vote per person.");
-      return;
-    }
-
+    setError(null);
     setSubmitting(true);
+
+    const API_URL =
+      import.meta.env.VITE_API_URL || "http://localhost:3000";
+
     try {
-      await castVote(id, {
-        optionId: selectedOption,
-        voterEmail: email.trim(),
+      const res = await fetch(`${API_URL}/api/polls/${id}/vote`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          optionId: Number(selectedOption),
+          voterEmail: voterEmail.trim(),
+        }),
       });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to submit vote");
+      }
+
       navigate(`/polls/${id}/results`);
     } catch (err) {
-      setVoteError(err.message);
+      setError(err.message);
+    } finally {
       setSubmitting(false);
     }
   }
 
-  if (loading) {
-    return (
-      <section>
-        <div className="empty-state">Loading poll...</div>
-      </section>
-    );
+  if (error && !poll) {
+    return <p>Error: {error}</p>;
   }
 
-  if (loadError) {
-    return (
-      <section>
-        <div className="empty-state error">Could not load this poll: {loadError}</div>
-        <p>
-          <Link to="/">Back to all polls</Link>
-        </p>
-      </section>
-    );
+  if (!poll) {
+    return <p>Loading...</p>;
   }
 
   return (
-    <section>
+    <div>
       <h1>{poll.title}</h1>
-      <p className="subtitle">{poll.description}</p>
+      <p>{poll.description}</p>
 
-      <form className="card form" onSubmit={handleVote}>
-        <div className="field">
-          <span>Choose one</span>
+      <form className="vote-form" onSubmit={handleSubmit}>
+        <div className="vote-options">
           {poll.options.map((option) => (
-            <label className="choice" key={option.id}>
+            <label className="vote-option" key={option.id}>
               <input
                 type="radio"
                 name="option"
                 value={option.id}
-                checked={selectedOption === option.id}
-                onChange={() => setSelectedOption(option.id)}
+                checked={selectedOption === String(option.id)}
+                onChange={(event) =>
+                  setSelectedOption(event.target.value)
+                }
+                required
               />
-              <span>{option.text}</span>
+
+              {option.text}
             </label>
           ))}
         </div>
 
-        <label className="field">
-          <span>Your email</span>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@example.com"
-          />
-        </label>
+        <div className="field">
+          <label htmlFor="voterEmail">Email</label>
 
-        {voteError && <p className="form-error">{voteError}</p>}
+          <input
+            id="voterEmail"
+            type="email"
+            value={voterEmail}
+            onChange={(event) =>
+              setVoterEmail(event.target.value)
+            }
+            required
+          />
+        </div>
+
+        {error && <p className="error-message">{error}</p>}
 
         <div className="poll-card-actions">
-          <button type="submit" className="btn" disabled={submitting}>
+          <button
+            className="btn"
+            type="submit"
+            disabled={submitting}
+          >
             {submitting ? "Submitting..." : "Submit Vote"}
           </button>
-          <Link className="btn btn-ghost" to={`/polls/${id}/results`}>
+
+          <Link
+            to={`/polls/${id}/results`}
+            className="btn btn-secondary"
+          >
             See Results
           </Link>
         </div>
       </form>
-
-      <p>
-        <Link to="/">Back to all polls</Link>
-      </p>
-    </section>
+    </div>
   );
 }
 

@@ -1,19 +1,21 @@
+// CreatePollPage.jsx - Creates a new poll.
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { createPoll } from "../api.js";
-
 function CreatePollPage() {
-  const navigate = useNavigate();
-
+  // Stores the title, description, options, and errors.
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [options, setOptions] = useState(["", ""]);
   const [error, setError] = useState("");
-  const [submitting, setSubmitting] = useState(false);
 
+  const navigate = useNavigate();
+
+  // Updates, adds, and removes poll options.
   function updateOption(index, value) {
-    setOptions((prev) => prev.map((opt, i) => (i === index ? value : opt)));
+    setOptions((prev) =>
+      prev.map((option, i) => (i === index ? value : option))
+    );
   }
 
   function addOption() {
@@ -21,100 +23,119 @@ function CreatePollPage() {
   }
 
   function removeOption(index) {
-    setOptions((prev) => prev.filter((_, i) => i !== index));
+    setOptions((prev) =>
+      prev.filter((option, i) => i !== index)
+    );
   }
 
+  // Sends the new poll to the backend.
   async function handleSubmit(event) {
     event.preventDefault();
     setError("");
 
-    const cleanOptions = options.map((o) => o.trim()).filter(Boolean);
+    const API_URL =
+      import.meta.env.VITE_API_URL || "http://localhost:3000";
 
-    if (!title.trim() || !description.trim()) {
-      setError("Please add a title and description.");
-      return;
-    }
-    if (cleanOptions.length < 2) {
-      setError("Please add at least 2 non-empty options.");
-      return;
-    }
-
-    setSubmitting(true);
     try {
-      const poll = await createPoll({
-        title: title.trim(),
-        description: description.trim(),
-        options: cleanOptions,
+      const res = await fetch(`${API_URL}/api/polls`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title,
+          description,
+          options,
+        }),
       });
-      navigate(`/polls/${poll.id}`);
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to create poll");
+      }
+
+      navigate(`/polls/${data.id}`);
     } catch (err) {
       setError(err.message);
-      setSubmitting(false);
     }
   }
 
+  // Displays the create poll form.
   return (
-    <section>
+    <div>
       <h1>Create a Poll</h1>
-      <p className="subtitle">Add a title, a description, and at least 2 options.</p>
+
+      <p className="subtitle">
+        Add a title, a description, and at least 2 options.
+      </p>
 
       <form className="card form" onSubmit={handleSubmit}>
         <label className="field">
-          <span>Title</span>
+          Title
           <input
             type="text"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
             placeholder="What should we build next?"
-            maxLength={255}
+            onChange={(event) => setTitle(event.target.value)}
+            required
           />
         </label>
 
         <label className="field">
-          <span>Description</span>
+          Description
           <textarea
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
             placeholder="A little context for voters."
-            rows={3}
+            onChange={(event) => setDescription(event.target.value)}
+            required
           />
         </label>
 
-        <div className="field">
-          <span>Options</span>
-          {options.map((option, index) => (
-            <div className="option-row" key={index}>
-              <input
-                type="text"
-                value={option}
-                onChange={(e) => updateOption(index, e.target.value)}
-                placeholder={`Option ${index + 1}`}
-              />
-              {options.length > 2 && (
-                <button
-                  type="button"
-                  className="btn btn-ghost btn-icon"
-                  onClick={() => removeOption(index)}
-                  aria-label={`Remove option ${index + 1}`}
-                >
-                  ✕
-                </button>
-              )}
-            </div>
-          ))}
-          <button type="button" className="btn btn-ghost" onClick={addOption}>
-            + Add option
-          </button>
-        </div>
+        <h2>Options</h2>
 
-        {error && <p className="form-error">{error}</p>}
+        {options.map((option, index) => (
+          <div className="option-row" key={index}>
+            <input
+              type="text"
+              value={option}
+              placeholder={`Option ${index + 1}`}
+              onChange={(event) =>
+                updateOption(index, event.target.value)
+              }
+              required
+            />
 
-        <button type="submit" className="btn" disabled={submitting}>
-          {submitting ? "Creating..." : "Create Poll"}
+            {options.length > 2 && (
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={() => removeOption(index)}
+              >
+                Remove
+              </button>
+            )}
+          </div>
+        ))}
+
+        <button
+          type="button"
+          className="btn btn-secondary"
+          onClick={addOption}
+        >
+          + Add option
+        </button>
+
+        {error && <p className="error-message">{error}</p>}
+
+        <button type="submit" className="btn">
+          Create Poll
         </button>
       </form>
-    </section>
+    </div>
   );
 }
 
 export default CreatePollPage;
+
+
