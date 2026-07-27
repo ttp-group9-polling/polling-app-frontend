@@ -14,6 +14,7 @@ function PollPage() {
   const [selectedOption, setSelectedOption] = useState("");
   const [voterEmail, setVoterEmail] = useState("");
   const [error, setError] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     const API_URL =
@@ -22,12 +23,12 @@ function PollPage() {
     async function loadPoll() {
       try {
         const res = await fetch(`${API_URL}/api/polls/${id}`);
+        const data = await res.json();
 
         if (!res.ok) {
-          throw new Error("Failed to load poll");
+          throw new Error(data.error || "Failed to load poll");
         }
 
-        const data = await res.json();
         setPoll(data);
       } catch (err) {
         setError(err.message);
@@ -39,6 +40,8 @@ function PollPage() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    setError(null);
+    setSubmitting(true);
 
     const API_URL =
       import.meta.env.VITE_API_URL || "http://localhost:3000";
@@ -51,17 +54,21 @@ function PollPage() {
         },
         body: JSON.stringify({
           optionId: Number(selectedOption),
-          voterEmail,
+          voterEmail: voterEmail.trim(),
         }),
       });
 
+      const data = await res.json();
+
       if (!res.ok) {
-        throw new Error("Failed to submit vote");
+        throw new Error(data.error || "Failed to submit vote");
       }
 
       navigate(`/polls/${id}/results`);
     } catch (err) {
       setError(err.message);
+    } finally {
+      setSubmitting(false);
     }
   }
 
@@ -86,6 +93,7 @@ function PollPage() {
                 type="radio"
                 name="option"
                 value={option.id}
+                checked={selectedOption === String(option.id)}
                 onChange={(event) =>
                   setSelectedOption(event.target.value)
                 }
@@ -114,8 +122,12 @@ function PollPage() {
         {error && <p className="error-message">{error}</p>}
 
         <div className="poll-card-actions">
-          <button className="btn" type="submit">
-            Submit Vote
+          <button
+            className="btn"
+            type="submit"
+            disabled={submitting}
+          >
+            {submitting ? "Submitting..." : "Submit Vote"}
           </button>
 
           <Link
