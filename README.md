@@ -2,15 +2,32 @@
 
 React frontend for the Group 9 TTP Summer 2026 Capstone I polling app.
 
-Users can:
+## Features
 
 - View all polls
-- Create a poll with 2 or more options
-- Open a poll and vote
-- See results ordered by vote count
-- Move between pages with React Router
+- Create a poll with two or more options
+- Vote using an email address
+- Prevent the same email from voting twice
+- View poll results
+- Navigate with React Router
 
-Polls and votes are stored in PostgreSQL through the Express backend, so they survive a refresh.
+## Project Links
+
+- Frontend Repository: https://github.com/ttp-group9-polling/polling-app-frontend
+- Backend Repository: https://github.com/ttp-group9-polling/polling-app-backend
+- GitHub Organization: https://github.com/ttp-group9-polling
+
+### Local Links
+
+These links work only while both servers are running:
+
+- Frontend: http://localhost:5173
+- Backend: http://localhost:3000
+
+### Live Links
+
+- Frontend: Add Vercel URL after deployment
+- Backend: Add Render URL after deployment
 
 ## Team
 
@@ -20,35 +37,87 @@ Polls and votes are stored in PostgreSQL through the Express backend, so they su
 | Rehman Mohammad | Backend Lead |
 | Shan Htet San | Database and Integration Lead |
 
-TA: Shirley Cheung
+**TA:** Shirley Cheung
 
-## Repositories
+## Technologies
 
-Two repos in the `ttp-group9-polling` organization:
+- React
+- Vite
+- React Router
+- JavaScript
+- CSS
+- Fetch API
 
-- Frontend: https://github.com/ttp-group9-polling/polling-app-frontend
-- Backend: https://github.com/ttp-group9-polling/polling-app-backend
-- Database: Neon PostgreSQL (no repo)
+## Run Locally
 
-This repo is the React frontend.
-
-## Getting Started
+### Backend
 
 ```bash
+cd ~/Documents/ttp-group9-polling/polling-app-backend
 npm install
-cp .env.example .env   # set VITE_API_URL to the backend URL
 npm run dev
 ```
 
-The app runs on http://localhost:5173 and expects the backend on http://localhost:3000.
+### Frontend
 
-## Structure
+Open another terminal:
+
+```bash
+cd ~/Documents/ttp-group9-polling/polling-app-frontend
+npm install
+npm run dev
+```
+
+The frontend runs on:
+
+```text
+http://localhost:5173
+```
+
+The backend runs on:
+
+```text
+http://localhost:3000
+```
+
+## Environment Variable
+
+Create a `.env` file in the frontend:
+
+```env
+VITE_API_URL=http://localhost:3000
+```
+
+Do not commit the `.env` file.
+
+## Project Structure
 
 ```text
 src/
-  components/   shared UI (Layout, PollCard)
-  pages/        Home, CreatePoll, Poll, Results, NotFound
-  api.js        fetch helpers for the backend
-  index.css     styles
-  main.jsx      routes
+  components/
+    Navbar.jsx
+    PollCard.jsx
+
+  pages/
+    Home.jsx
+    CreatePollPage.jsx
+    PollPage.jsx
+    ResultsPage.jsx
+
+  App.jsx
+  index.css
+  main.jsx
 ```
+
+## Testing
+
+```bash
+npm run lint
+npm run build
+```
+
+## Deployment
+
+- Frontend: Vercel
+- Backend: Render
+- Database: Neon PostgreSQL
