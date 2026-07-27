@@ -4,6 +4,8 @@
   --surface: #191d31;
   --text: #e8eaf2;
   --muted: #9aa0bd;
+  --primary: #6674ff;
+  --danger: #ff8d8d;
   --border: #2c3252;
   --radius: 12px;
 
@@ -27,25 +29,84 @@ body {
   line-height: 1.5;
 }
 
+/* Uses the same font for form controls */
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+/* Keeps the footer at the bottom */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Arranges the navbar content */
+.navbar {
+  min-height: 72px;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Styles the app name */
+.brand {
+  color: var(--text);
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* Arranges the navigation links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* Styles the navigation links */
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
 /* Centers the page content */
 .page {
   width: min(900px, calc(100% - 2rem));
   margin: 0 auto;
   padding: 3rem 0;
+  flex: 1;
 }
 
-/* Styles the main page heading */
+/* Styles page headings */
 h1 {
   margin: 0 0 0.5rem;
   font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.2;
+}
+
+h2 {
+  margin: 0;
+}
+
+/* Styles supporting page text */
+.subtitle {
+  margin: 0;
+  color: var(--muted);
 }
 
 /* Creates the card container */
 .card {
+  padding: 1.5rem;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 1.5rem;
 }
 
 /* Arranges multiple poll cards */
@@ -56,8 +117,9 @@ h1 {
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
 }
 
-/* Arranges the poll card content */
+/* Arranges one poll card */
 .poll-card {
+  min-height: 245px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -65,7 +127,7 @@ h1 {
 
 /* Styles the poll title */
 .poll-card-title {
-  margin: 0 0 0.35rem;
+  margin: 0;
   font-size: 1.2rem;
 }
 
@@ -80,4 +142,161 @@ h1 {
   margin: 0.5rem 0 0;
   font-size: 0.85rem;
   color: var(--muted);
+}
+
+/* Arranges the poll card buttons */
+.poll-card-actions {
+  margin-top: auto;
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Styles links and buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.1rem;
+  border: 1px solid var(--primary);
+  border-radius: 10px;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Styles secondary buttons */
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+
+/* Arranges the create poll form */
+.form {
+  width: 100%;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Arranges each form field */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Styles form labels */
+.field label {
+  font-weight: 600;
+}
+
+/* Styles form inputs */
+.field input,
+.field textarea,
+.option-row input {
+  width: 100%;
+  padding: 0.75rem 0.85rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+/* Highlights the selected field */
+.field input:focus,
+.field textarea:focus,
+.option-row input:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+/* Sets the description field height */
+.field textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Arranges each option input */
+.option-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Allows the option input to fill the row */
+.option-row input {
+  flex: 1;
+}
+
+/* Styles error messages */
+.error-message {
+  margin: 0;
+  color: var(--danger);
+}
+
+/* Arranges the voting form */
+.vote-form {
+  width: 100%;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Arranges the voting options */
+.vote-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Styles each voting option */
+.vote-option {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+/* Styles radio buttons */
+.vote-option input[type="radio"] {
+  width: auto;
+  accent-color: var(--primary);
+}
+
+/* Arranges the result list */
+.results {
+  width: 100%;
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Styles each result */
+.result-row {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+/* Highlights the option with the most votes */
+.result-row:first-child {
+  border-color: var(--primary);
+}
+
+/* Highlights the winning vote count */
+.result-row:first-child strong {
+  color: var(--primary);
 }
