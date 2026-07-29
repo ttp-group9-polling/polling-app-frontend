@@ -2,9 +2,11 @@
 :root {
   --bg: #0f1220;
   --surface: #191d31;
+  --surface-hover: #202640;
   --text: #e8eaf2;
   --muted: #9aa0bd;
   --primary: #6674ff;
+  --primary-hover: #7985ff;
   --danger: #ff8d8d;
   --border: #2c3252;
   --radius: 12px;
@@ -36,7 +38,12 @@ textarea {
   font: inherit;
 }
 
-
+/* Keeps the footer at the bottom */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
 /* Arranges the navbar content */
 .navbar {
@@ -48,13 +55,15 @@ textarea {
   gap: 2rem;
   background: var(--surface);
   border-bottom: 1px solid var(--border);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
 }
 
 /* Styles the app name */
 .brand {
   color: var(--text);
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 750;
+  letter-spacing: 0.5px;
   text-decoration: none;
 }
 
@@ -62,13 +71,28 @@ textarea {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 0.75rem;
 }
 
 /* Styles the navigation links */
 .nav-links a {
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
   color: var(--muted);
+  font-size: 1.1rem;
+  font-weight: 600;
   text-decoration: none;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* Adds interaction to the navigation links */
+.nav-links a:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
 }
 
 /* Centers the page content */
@@ -108,8 +132,8 @@ h2 {
 .poll-grid {
   margin-top: 2rem;
   display: grid;
-  gap: 1rem;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
 }
 
 /* Arranges one poll card */
@@ -118,6 +142,17 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Adds interaction to poll cards */
+.poll-card:hover {
+  transform: translateY(-3px);
+  border-color: #404a7b;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 }
 
 /* Styles the poll title */
@@ -135,8 +170,8 @@ h2 {
 /* Styles the option count */
 .poll-card-meta {
   margin: 0.5rem 0 0;
-  font-size: 0.85rem;
   color: var(--muted);
+  font-size: 0.85rem;
 }
 
 /* Arranges the poll card buttons */
@@ -148,10 +183,10 @@ h2 {
 
 /* Styles links and buttons */
 .btn {
+  padding: 0.6rem 1.1rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.6rem 1.1rem;
   border: 1px solid var(--primary);
   border-radius: 10px;
   background: var(--primary);
@@ -159,6 +194,17 @@ h2 {
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* Adds interaction to buttons */
+.btn:hover {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+  transform: translateY(-1px);
 }
 
 /* Styles secondary buttons */
@@ -166,6 +212,11 @@ h2 {
   background: transparent;
   color: var(--text);
   border-color: var(--border);
+}
+
+.btn-secondary:hover {
+  background: var(--surface-hover);
+  border-color: #404a7b;
 }
 
 /* Arranges the create poll form */
@@ -195,18 +246,22 @@ h2 {
 .option-row input {
   width: 100%;
   padding: 0.75rem 0.85rem;
-  color: var(--text);
-  background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 /* Highlights the selected field */
 .field input:focus,
 .field textarea:focus,
 .option-row input:focus {
-  outline: 2px solid var(--primary);
-  outline-offset: 1px;
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(102, 116, 255, 0.18);
 }
 
 /* Sets the description field height */
@@ -258,6 +313,14 @@ h2 {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.vote-option:hover {
+  background: var(--surface-hover);
+  border-color: #404a7b;
 }
 
 /* Styles radio buttons */
@@ -296,13 +359,6 @@ h2 {
   color: var(--primary);
 }
 
-/* Keeps the footer at the bottom */
-.app {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
 /* Styles the footer */
 .footer {
   padding: 1.25rem;
@@ -313,4 +369,35 @@ h2 {
 
 .footer p {
   margin: 0;
+}
+
+/* Adjusts the layout for smaller screens */
+@media (max-width: 600px) {
+  .navbar {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .nav-links a {
+    padding: 0.55rem 0.75rem;
+    font-size: 1rem;
+  }
+
+  .page {
+    padding: 2rem 0;
+  }
+
+  .poll-card-actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
 }
